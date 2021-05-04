@@ -6,6 +6,7 @@ ReactDOM.render(
   <React.StrictMode>
       <h1>nimitpatel.me</h1>
       <ul>
+          <li>About</li>
           <li>Work Experience</li>
           <li>Education</li>
           <li>Projects</li>
