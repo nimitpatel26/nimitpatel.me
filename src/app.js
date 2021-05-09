@@ -27,23 +27,24 @@ class App extends React.Component {
 
     AppBody(tabSelected){
         if (tabSelected === "experience"){
-            return <Experience></Experience>
+            return <Experience/>
         }
         if (tabSelected === "education"){
-            return <Education></Education>
+            return <Education/>
         }
         if (tabSelected === "projects"){
-            return <Projects></Projects>
+            return <Projects/>
         }
-        return <About></About>
+        return <About/>
     }
 
 
     render(){
+
         return (
             <div className="app">
                 <h1>nimitpatel.me</h1>
-                <Menu mode="horizontal" selectedKeys={[this.state.tabSelected]} onClick={this.changeTab}>
+                <Menu className="menu" mode="horizontal" selectedKeys={[this.state.tabSelected]} onClick={this.changeTab}>
                     <Menu.Item key="about">About</Menu.Item>
                     <Menu.Item key="education">Education</Menu.Item>
                     <Menu.Item key="projects">Projects</Menu.Item>
@@ -51,7 +52,9 @@ class App extends React.Component {
                     <Menu.Item key="resume">Resume</Menu.Item>
                 </Menu>
 
-                {this.AppBody(this.state.tabSelected)}
+                <div className="content">
+                    {this.AppBody(this.state.tabSelected)}
+                </div>
             </div>
 
         );

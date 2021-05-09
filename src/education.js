@@ -18,8 +18,8 @@ class Education extends React.Component {
     }
 
     render(){
-        var formattedData = this.state.schoolData.map(school => {
-            var formattedDetails = school.description.map(detail => {
+        let formattedData = this.state.schoolData.map(school => {
+            let formattedDetails = school.description.map(detail => {
                 return (
                   <p>{detail}</p>
                 );

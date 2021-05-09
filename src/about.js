@@ -23,7 +23,6 @@ class About extends React.Component{
     render(){
         return (
             <div>
-                <h1>About</h1>
                 <h1>{this.state.aboutTitle}</h1>
                 <p>{this.state.aboutDetails}</p>
             </div>
