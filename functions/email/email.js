@@ -2,7 +2,7 @@ const process = require('process');
 
 const nodemailer = require('nodemailer');
 
-const handler = async (event) => {
+const handler = (event) => {
 
     try {
         let emailPayload = JSON.parse(event.body);
@@ -26,8 +26,8 @@ const handler = async (event) => {
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
-            console.log("ERROR IS: " + error.toString());
-            console.log("INFO IS: " + info.toString());
+            // console.log("ERROR IS: " + error.toString());
+            // console.log("INFO IS: " + info.toString());
 
             if (error) {
                 return {statusCode: 500, body: error.toString()}
@@ -41,7 +41,7 @@ const handler = async (event) => {
 
 
     } catch (error) {
-        console.log("OUTTER ERROR IS " + error.toString());
+        // console.log("OUTTER ERROR IS " + error.toString());
         return {statusCode: 500, body: error.toString()}
     }
 }
