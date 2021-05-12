@@ -23,10 +23,10 @@ class Projects extends React.Component {
     render() {
         let formattedData = this.state.projectData.map(project => {
 
-            let formattedDes = project.description.map(des => <p>{des}</p>);
+            let formattedDes = project.description.map(des => <p key={des}>{des}</p>);
 
             return (
-                <Card title={project.title} className="Card">
+                <Card key={project.title} title={project.title} className="Card">
                     <p>{formattedDes}</p>
                     <p>{project.source}</p>
                     <p>{project.demo}</p>
@@ -35,9 +35,9 @@ class Projects extends React.Component {
         })
 
         return (
-            <div>
+            <>
                 {formattedData}
-            </div>
+            </>
         );
     }
 }

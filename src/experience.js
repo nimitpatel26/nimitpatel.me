@@ -25,10 +25,10 @@ class Experience extends React.Component {
 
         let formattedData = this.state.experienceData.map(work => {
 
-            let formattedDetails = work.details.map(detail => <p>{detail}</p>);
+            let formattedDetails = work.details.map(detail => <p key={detail}>{detail}</p>);
 
             return (
-                <Card title={work.title} className="Card">
+                <Card key={work.title} title={work.title} className="Card">
                     <p>{work.company}</p>
                     <p>{work.from}-{work.to}</p>
                     <p>{formattedDetails}</p>
@@ -37,9 +37,9 @@ class Experience extends React.Component {
         })
 
         return (
-            <div>
+            <>
                 {formattedData}
-            </div>
+            </>
         );
     }
 }

@@ -21,20 +21,20 @@ class Education extends React.Component {
         let formattedData = this.state.schoolData.map(school => {
             let formattedDetails = school.description.map(detail => {
                 return (
-                  <p>{detail}</p>
+                  <p key={detail} >{detail}</p>
                 );
             })
             return (
-                <Card title={school.name} className="Card">
+                <Card key={school.name} title={school.name} className="Card">
                     {formattedDetails}
                 </Card>
             )
         })
 
         return (
-            <div>
+            <>
                 {formattedData}
-            </div>
+            </>
         );
     }
 }

@@ -3,10 +3,12 @@ import {Menu} from "antd";
 
 
 
+
 import {About} from "./about";
 import {Experience} from "./experience";
 import {Education} from "./education";
 import {Projects} from "./projects";
+import {Contact} from "./contact";
 
 import './app.less';
 
@@ -26,6 +28,7 @@ class App extends React.Component {
     }
 
     AppBody(tabSelected){
+
         if (tabSelected === "experience"){
             return <Experience/>
         }
@@ -35,7 +38,11 @@ class App extends React.Component {
         if (tabSelected === "projects"){
             return <Projects/>
         }
+        if (tabSelected === "contact"){
+            return <Contact/>
+        }
         return <About/>
+
     }
 
 
@@ -50,6 +57,7 @@ class App extends React.Component {
                     <Menu.Item key="projects">Projects</Menu.Item>
                     <Menu.Item key="experience">Experience</Menu.Item>
                     <Menu.Item key="resume">Resume</Menu.Item>
+                    <Menu.Item key="contact">Contact</Menu.Item>
                 </Menu>
 
                 <div className="content">
