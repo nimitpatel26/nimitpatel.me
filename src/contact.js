@@ -4,34 +4,18 @@ import 'antd/dist/antd.less';
 import './contact.less';
 
 
-// const validateMessages = {
-//     required: '${label} is required!',
-//     types: {
-//         email: '${label} is not a valid email!',
-//         number: '${label} is not a valid number!',
-//     },
-//     number: {
-//         range: '${label} must be between ${min} and ${max}',
-//     },
-// };
 
 class Contact extends React.Component {
     state = {
         messageStatus: "NOT_SENT",
     }
 
-    // formRef = React.createRef();
-
     constructor() {
         super();
         this.wrapper = React.createRef();
     }
 
-
-
     onFinish = async (values) => {
-        console.log("got data in contact.js");
-        console.log(values);
         const response = await fetch("/.netlify/functions/email", {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -60,7 +44,7 @@ class Contact extends React.Component {
 
     MessageForm = function (finishFunc) {
         return (
-            <Form ref={this.wrapper} name="control-ref" onFinish={finishFunc} layout="horizontal"
+            <Form ref={this.wrapper} name="control-ref" onFinish={finishFunc} layout="horizontal" className="Form"
                   labelCol={{span: 2}} wrapperCol={{span: 14}}
                 // form={form}
                 // onValuesChange={onFormLayoutChange}
@@ -77,7 +61,7 @@ class Contact extends React.Component {
                 <Form.Item label="Details" name="Details" rules={[{required: true}]}>
                     <Input.TextArea autoSize={{minRows: 3, maxRows: 12}}/>
                 </Form.Item>
-                <Form.Item wrapperCol={{span: 14, offset: 2}}>
+                <Form.Item wrapperCol={{span: 1, offset: 2}}>
                     <Button type="primary" htmlType="submit">Submit</Button>
                 </Form.Item>
             </Form>);

@@ -21,20 +21,20 @@ const handler = async (event) => {
         let mailOptions = {
             from: emailAccount.Username,
             to: process.env.TARGET_EMAIL,
-            subject: process.env.EMAIL_SUBJECT + ": " + emailPayload.Subject,
+            subject: process.env.EMAIL_SUBJECT + emailPayload.Subject,
             text: emailBody
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error);
+                return {statusCode: 500, body: error.toString()}
             } else {
-                console.log('Email sent: ' + info.response);
+                return {statusCode: 200, body: "Message Sent!"};
             }
         });
 
 
-        return {statusCode: 200, body: "Message Sent!"};
+
 
 
     } catch (error) {
