@@ -26,6 +26,9 @@ const handler = async (event) => {
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
+            console.log("ERROR IS: " + error.toString());
+            console.log("INFO IS: " + info.toString());
+
             if (error) {
                 return {statusCode: 500, body: error.toString()}
             } else {
@@ -38,7 +41,7 @@ const handler = async (event) => {
 
 
     } catch (error) {
-        // console.log(error);
+        console.log("OUTTER ERROR IS " + error.toString());
         return {statusCode: 500, body: error.toString()}
     }
 }
