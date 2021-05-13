@@ -1,6 +1,7 @@
 import React from 'react';
 import {Form, Input, Button} from "antd";
 
+
 import config from '../config';
 import './contact.less';
 
@@ -10,20 +11,28 @@ class Contact extends React.Component {
         messageStatus: "NOT_SENT",
     }
 
+    // formRef = React.createRef();
+
     constructor(props) {
         super(props);
         this.wrapper = React.createRef();
     }
 
-    async onFinish(values) {
+
+
+    onFinish = async (values) => {
         const response = await fetch(config.api.email, {
-            method: 'POST',
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(values)
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(values) // body data type must match "Content-Type" header
         });
-
         if (response.status === 200) {
 
             this.setState({
@@ -38,10 +47,12 @@ class Contact extends React.Component {
 
     };
 
-    MessageForm(finishFunc) {
+    MessageForm = function (finishFunc) {
         return (
-            <Form ref={this.wrapper} name="control-ref" onFinish={finishFunc} layout="horizontal" className="Form"
+            <Form ref={this.wrapper} name="control-ref" onFinish={finishFunc} layout="horizontal"
                   labelCol={{span: 2}} wrapperCol={{span: 14}}
+                // form={form}
+                // onValuesChange={onFormLayoutChange}
             >
                 <Form.Item label="Name" name="Name" rules={[{required: true}]}>
                     <Input/>
@@ -55,17 +66,17 @@ class Contact extends React.Component {
                 <Form.Item label="Details" name="Details" rules={[{required: true}]}>
                     <Input.TextArea autoSize={{minRows: 3, maxRows: 12}}/>
                 </Form.Item>
-                <Form.Item wrapperCol={{span: 1, offset: 2}}>
+                <Form.Item wrapperCol={{span: 14, offset: 2}}>
                     <Button type="primary" htmlType="submit">Submit</Button>
                 </Form.Item>
             </Form>);
     }
 
-    Sent() {
+    Sent = function (){
         return (<h1>Message Sent Successfully!</h1>);
     }
 
-    Failed() {
+    Failed = function (){
         return (<h1>Failed to Send Message!</h1>);
     }
 
