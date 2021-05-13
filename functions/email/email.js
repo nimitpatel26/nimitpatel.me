@@ -21,11 +21,11 @@ const handler = (event) => {
         let mailOptions = {
             from: emailAccount.Username,
             to: process.env.TARGET_EMAIL,
-            subject: process.env.EMAIL_SUBJECT + emailPayload.Subject,
+            subject: process.env.EMAIL_SUBJECT + " " + emailPayload.Subject,
             text: emailBody
         };
 
-        transporter.sendMail(mailOptions, function (error, info) {
+        transporter.sendMail(mailOptions, function (error) {
             // console.log("ERROR IS: " + error.toString());
             // console.log("INFO IS: " + info.toString());
 
