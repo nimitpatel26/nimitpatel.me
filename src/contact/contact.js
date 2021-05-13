@@ -1,8 +1,8 @@
 import React from 'react';
 import {Form, Input, Button} from "antd";
-import 'antd/dist/antd.less';
-import './contact.less';
 
+import config from '../config';
+import './contact.less';
 
 
 class Contact extends React.Component {
@@ -10,24 +10,20 @@ class Contact extends React.Component {
         messageStatus: "NOT_SENT",
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.wrapper = React.createRef();
     }
 
-    onFinish = async (values) => {
-        const response = await fetch("/.netlify/functions/email", {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
+    async onFinish(values) {
+        const response = await fetch(config.api.email, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(values) // body data type must match "Content-Type" header
+            body: JSON.stringify(values)
         });
+
         if (response.status === 200) {
 
             this.setState({
@@ -42,12 +38,10 @@ class Contact extends React.Component {
 
     };
 
-    MessageForm = function (finishFunc) {
+    MessageForm(finishFunc) {
         return (
             <Form ref={this.wrapper} name="control-ref" onFinish={finishFunc} layout="horizontal" className="Form"
                   labelCol={{span: 2}} wrapperCol={{span: 14}}
-                // form={form}
-                // onValuesChange={onFormLayoutChange}
             >
                 <Form.Item label="Name" name="Name" rules={[{required: true}]}>
                     <Input/>
@@ -67,11 +61,11 @@ class Contact extends React.Component {
             </Form>);
     }
 
-    Sent = function (){
+    Sent() {
         return (<h1>Message Sent Successfully!</h1>);
     }
 
-    Failed = function (){
+    Failed() {
         return (<h1>Failed to Send Message!</h1>);
     }
 

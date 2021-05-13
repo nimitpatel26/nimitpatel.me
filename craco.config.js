@@ -14,4 +14,12 @@ module.exports = {
             },
         },
     ],
+
+    externals: {
+        'ConfigData': {
+            clientID: '1097hy67546hbdy2',
+            serverURL: 'https://example.com/api/'
+        }
+
+    },
 };

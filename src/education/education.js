@@ -1,14 +1,17 @@
 import React from 'react';
 import {Card} from "antd";
 
+import config from '../config';
 import './education.less';
+
+
 class Education extends React.Component {
     state = {
         schoolData: []
     }
 
     componentDidMount() {
-        fetch("/.netlify/functions/education").then(resp => resp.json()).then(
+        fetch(config.api.education).then(resp => resp.json()).then(
             data => {
                 this.setState({
                     schoolData: data,
@@ -17,11 +20,11 @@ class Education extends React.Component {
             });
     }
 
-    render(){
-        let formattedData = this.state.schoolData.map(school => {
+    getFormattedData() {
+        return this.state.schoolData.map(school => {
             let formattedDetails = school.description.map(detail => {
                 return (
-                  <p key={detail} >{detail}</p>
+                    <p key={detail} >{detail}</p>
                 );
             })
             return (
@@ -31,9 +34,13 @@ class Education extends React.Component {
             )
         })
 
+    }
+
+    render() {
+
         return (
             <>
-                {formattedData}
+                {this.getFormattedData()}
             </>
         );
     }

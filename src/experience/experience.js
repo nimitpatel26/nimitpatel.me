@@ -1,8 +1,8 @@
 import React from 'react';
-// import {Card} from "antd";
-
-import './experience.less';
 import {Card} from "antd";
+
+import config from '../config';
+import './experience.less';
 
 
 class Experience extends React.Component {
@@ -12,7 +12,7 @@ class Experience extends React.Component {
     }
 
     componentDidMount() {
-        fetch("/.netlify/functions/experience").then(resp => resp.json()).then(
+        fetch(config.api.experience).then(resp => resp.json()).then(
             data => {
                 this.setState({
                     experienceData: data,
@@ -21,9 +21,8 @@ class Experience extends React.Component {
             });
     }
 
-    render() {
-
-        let formattedData = this.state.experienceData.map(work => {
+    getFormattedData() {
+        return this.state.experienceData.map(work => {
 
             let formattedDetails = work.details.map(detail => <p key={detail}>{detail}</p>);
 
@@ -35,10 +34,13 @@ class Experience extends React.Component {
                 </Card>
             )
         })
+    }
+
+    render() {
 
         return (
             <>
-                {formattedData}
+                {this.getFormattedData()}
             </>
         );
     }

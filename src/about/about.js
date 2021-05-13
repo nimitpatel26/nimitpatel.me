@@ -1,6 +1,6 @@
 import React from 'react';
-// import {Card} from "antd";
 
+import config from '../config';
 import './about.less';
 
 class About extends React.Component{
@@ -10,7 +10,7 @@ class About extends React.Component{
     }
 
     componentDidMount() {
-        fetch("/.netlify/functions/about").then(resp => resp.json()).then(
+        fetch(config.api.about).then(resp => resp.json()).then(
             data => {
                 this.setState({
                     aboutTitle: data.title,

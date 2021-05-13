@@ -26,8 +26,6 @@ const handler = (event) => {
         };
 
         transporter.sendMail(mailOptions, function (error) {
-            // console.log("ERROR IS: " + error.toString());
-            // console.log("INFO IS: " + info.toString());
 
             if (error) {
                 return {statusCode: 500, body: error.toString()}
@@ -41,7 +39,6 @@ const handler = (event) => {
 
 
     } catch (error) {
-        // console.log("OUTTER ERROR IS " + error.toString());
         return {statusCode: 500, body: error.toString()}
     }
 }

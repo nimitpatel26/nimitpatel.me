@@ -1,15 +1,11 @@
 import React from "react";
 import {Menu} from "antd";
 
-
-
-
-import {About} from "./about";
-import {Experience} from "./experience";
-import {Education} from "./education";
-import {Projects} from "./projects";
-import {Contact} from "./contact";
-
+import {About} from "./about/about";
+import {Experience} from "./experience/experience";
+import {Education} from "./education/education";
+import {Projects} from "./projects/projects";
+import {Contact} from "./contact/contact";
 import './app.less';
 
 
