@@ -1,6 +1,7 @@
 import React from 'react';
-import {Form, Input, Button} from "antd";
-
+import {Form, Input, Button, Typography} from "antd";
+import {CheckCircleTwoTone, CloseCircleTwoTone} from '@ant-design/icons';
+import 'antd/dist/antd.less';
 
 import config from '../config';
 import './contact.less';
@@ -9,6 +10,7 @@ import './contact.less';
 class Contact extends React.Component {
     state = {
         messageStatus: "NOT_SENT",
+        submitted: false,
     }
 
     // formRef = React.createRef();
@@ -19,8 +21,12 @@ class Contact extends React.Component {
     }
 
 
-
     onFinish = async (values) => {
+
+        this.setState({
+            submitted: true,
+        })
+
         const response = await fetch(config.api.email, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -37,13 +43,13 @@ class Contact extends React.Component {
 
             this.setState({
                 messageStatus: "SENT",
-            })
+            });
             return;
         }
 
         this.setState({
             messageStatus: "FAILED",
-        })
+        });
 
     };
 
@@ -67,26 +73,37 @@ class Contact extends React.Component {
                     <Input.TextArea autoSize={{minRows: 3, maxRows: 12}}/>
                 </Form.Item>
                 <Form.Item wrapperCol={{span: 14, offset: 2}}>
-                    <Button type="primary" htmlType="submit">Submit</Button>
+                    <Button type="primary" htmlType="submit" loading={this.state.submitted}>Submit</Button>
                 </Form.Item>
             </Form>);
     }
 
-    Sent = function (){
-        return (<h1>Message Sent Successfully!</h1>);
+    Sent = function () {
+        return (
+            <div className="statusBox">
+                <CheckCircleTwoTone className="statusIcon" twoToneColor="#52c41a"/>
+                <h2 className="statusHeading">Message Sent Successfully!</h2>
+            </div>
+
+        );
     }
 
-    Failed = function (){
-        return (<h1>Failed to Send Message!</h1>);
+    Failed = function () {
+        return (
+            <div className="statusBox">
+                <CloseCircleTwoTone className="statusIcon" twoToneColor="#FF0000" style={{fontSize:"1.5rem"}}/>
+                <h2 className="statusHeading">Failed to Send Message!</h2>
+            </div>
+        );
     }
 
     render() {
-        if (this.state.messageStatus === "NOT_SENT"){
+        if (this.state.messageStatus === "NOT_SENT") {
             return this.MessageForm(this.onFinish);
-        }else if (this.state.messageStatus === "SENT"){
-            return this.Sent();
-        }else{
-            return  this.Failed();
+        } else if (this.state.messageStatus === "SENT") {
+            return <this.Sent/>
+        } else {
+            return <this.Failed/>
         }
     }
 
