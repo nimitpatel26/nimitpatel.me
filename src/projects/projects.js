@@ -10,6 +10,7 @@ class Projects extends React.Component {
 
     state = {
         projectData: [],
+        visProjInd: [],
         selectedTags: [],
         tagsData: [],
     }
@@ -27,9 +28,10 @@ class Projects extends React.Component {
 
                 this.setState({
                     projectData: data,
-                    selectedTags: Array.from(tags),
                     tagsData: Array.from(tags),
                 });
+
+                this.setVisProj([]);
 
 
             });
@@ -39,43 +41,66 @@ class Projects extends React.Component {
     handleChange(tag, checked) {
         const {selectedTags} = this.state;
         const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag);
-        this.setState({selectedTags: nextSelectedTags});
+        this.setState({selectedTags: nextSelectedTags})
+
+
+        this.setVisProj(nextSelectedTags);
+
     }
 
-
-    isCardVisible(id) {
-        for (let tag of this.state.projectData[id].tags) {
-            if (this.state.selectedTags.includes(tag)) {
-                return "inherit";
+    setVisProj(selectedTags){
+        let visInd = []
+        for(let i = 0; i < this.state.projectData.length; i++) {
+            let present = false;
+            for (let tag of selectedTags) {
+                if (this.state.projectData[i].tags.includes(tag)) {
+                    present = true;
+                    break;
+                }
             }
+            if (present || selectedTags.length === 0) {
+                visInd.push(i);
+            }
+
+
         }
-        return "none";
+
+        this.setState({visProjInd: visInd});
     }
 
 
     getFormattedData(){
-        let index = -1;
-        let cards =  this.state.projectData.map(project => {
+
+        let dataToShow = [];
+
+        for (let i = 0; i < this.state.projectData.length; i++){
+            if (!this.state.visProjInd.includes(i)){
+                continue;
+            }
+            let project = this.state.projectData[i];
+
             let formattedDes = project.description.map(des => <p key={des}>{des}</p>);
             let formattedTags = project.tags.map(tag => <Tag key={tag}>{tag}</Tag>);
-            index += 1;
 
-            return (
+
+            dataToShow.push (
                 <div className="Card" >
-                <Card key={index} title={project.title} style={{display: this.isCardVisible(index)}}
-                      extra={<a href={project.source} target="_blank"><GithubOutlined style={{fontSize: "1.5rem"}}/></a>}>
-                    <p>{formattedDes}</p>
+                    <Card key={i} title={project.title}
+                          extra={<a href={project.source} target="_blank"><GithubOutlined className="source"/></a>}>
+                        <p>{formattedDes}</p>
 
-                    {formattedTags}
-                </Card>
+                        {formattedTags}
+                    </Card>
                 </div>
 
-            )
-        });
+            );
+
+        }
+
 
         return (
             <div style={{display: "flex", flexFlow: "row wrap"}}>
-                {cards}
+                {dataToShow}
             </div>
 
         );
@@ -89,7 +114,7 @@ class Projects extends React.Component {
 
         return (
             <>
-                <div className="TagBar">
+                <div className="tagBar">
                     <span style={{marginRight: 8}}>Filter:</span>
                     {this.state.tagsData.map(tag => (
                         <Tag.CheckableTag
