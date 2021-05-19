@@ -80,7 +80,7 @@ class Projects extends React.Component {
             }
             let project = this.state.projectData[i];
 
-            let formattedDes = project.description.map(des => <p key={des}>{des}</p>);
+            let formattedDes = project.description.map(des => <li key={des}>{des}</li>);
             let formattedTags = project.tags.map(tag => <Tag key={tag}>{tag}</Tag>);
 
 
@@ -88,7 +88,7 @@ class Projects extends React.Component {
                 <div className="Card" >
                     <Card key={i} title={project.title}
                           extra={<a href={project.source} target="_blank"><GithubOutlined className="source"/></a>}>
-                        <p>{formattedDes}</p>
+                        <ul>{formattedDes}</ul>
 
                         {formattedTags}
                     </Card>
