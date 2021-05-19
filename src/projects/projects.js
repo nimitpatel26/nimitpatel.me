@@ -24,11 +24,12 @@ class Projects extends React.Component {
                     for (let tag of proj.tags) {
                         tags.add(tag);
                     }
+                    proj.tags.sort();
                 }
 
                 this.setState({
                     projectData: data,
-                    tagsData: Array.from(tags),
+                    tagsData: Array.from(tags).sort(),
                 });
 
                 this.setVisProj([]);
@@ -99,7 +100,7 @@ class Projects extends React.Component {
 
 
         return (
-            <div style={{display: "flex", flexFlow: "row wrap"}}>
+            <div className="cardsContainer">
                 {dataToShow}
             </div>
 
@@ -115,7 +116,7 @@ class Projects extends React.Component {
         return (
             <>
                 <div className="tagBar">
-                    <span style={{marginRight: 8}}>Filter:</span>
+                    <span style={{marginRight: 8}}><b>Filter:</b></span>
                     {this.state.tagsData.map(tag => (
                         <Tag.CheckableTag
                             key={tag}

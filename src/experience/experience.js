@@ -39,9 +39,10 @@ class Experience extends React.Component {
     render() {
 
         return (
-            <>
+            <div className="cardsContainer">
+
                 {this.getFormattedData()}
-            </>
+            </div>
         );
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input, Button, Typography} from "antd";
+import {Form, Input, Button} from "antd";
 import {CheckCircleTwoTone, CloseCircleTwoTone} from '@ant-design/icons';
 import 'antd/dist/antd.less';
 
@@ -53,9 +53,9 @@ class Contact extends React.Component {
 
     };
 
-    MessageForm = function (finishFunc) {
+    MessageForm = function (finishFunc, formSubmitted) {
         return (
-            <Form ref={this.wrapper} name="control-ref" onFinish={finishFunc} layout="horizontal"
+            <Form ref={this.wrapper} name="control-ref" onFinish={finishFunc} layout="horizontal" className="form"
                   labelCol={{span: 2}} wrapperCol={{span: 14}}
                 // form={form}
                 // onValuesChange={onFormLayoutChange}
@@ -73,7 +73,7 @@ class Contact extends React.Component {
                     <Input.TextArea autoSize={{minRows: 3, maxRows: 12}}/>
                 </Form.Item>
                 <Form.Item wrapperCol={{span: 14, offset: 2}}>
-                    <Button type="primary" htmlType="submit" loading={this.state.submitted}>Submit</Button>
+                    <Button type="primary" htmlType="submit" loading={formSubmitted}>Submit</Button>
                 </Form.Item>
             </Form>);
     }
@@ -92,14 +92,14 @@ class Contact extends React.Component {
         return (
             <div className="statusBox">
                 <CloseCircleTwoTone className="statusIcon" twoToneColor="#FF0000" style={{fontSize:"1.5rem"}}/>
-                <h2 className="statusHeading">Failed to Send Message!</h2>
+                <h2 className="statusHeading">Failed To Send The Message!</h2>
             </div>
         );
     }
 
     render() {
         if (this.state.messageStatus === "NOT_SENT") {
-            return this.MessageForm(this.onFinish);
+            return this.MessageForm(this.onFinish, this.state.submitted);
         } else if (this.state.messageStatus === "SENT") {
             return <this.Sent/>
         } else {

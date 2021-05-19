@@ -46,7 +46,9 @@ class App extends React.Component {
 
         return (
             <div className="app">
-                <h1>nimitpatel.me</h1>
+                <div className="header">
+                    <h1>nimitpatel.me</h1>
+
                 <Menu className="menu" mode="horizontal" selectedKeys={[this.state.tabSelected]} onClick={this.changeTab}>
                     <Menu.Item key="about">About</Menu.Item>
                     <Menu.Item key="education">Education</Menu.Item>
@@ -55,6 +57,7 @@ class App extends React.Component {
                     <Menu.Item key="resume">Resume</Menu.Item>
                     <Menu.Item key="contact">Contact</Menu.Item>
                 </Menu>
+                </div>
 
                 <div className="content">
                     {this.AppBody(this.state.tabSelected)}
