@@ -8,7 +8,8 @@ const config = {
         email: "/.netlify/functions/email",
         education: "/.netlify/functions/education",
         experience: "/.netlify/functions/experience",
-        projects: "/.netlify/functions/projects"
+        projects: "/.netlify/functions/projects",
+        resume: "/.netlify/functions/resume"
     },
 };
 

@@ -7,6 +7,7 @@ import {Education} from "./education/education";
 import {Projects} from "./projects/projects";
 import {Contact} from "./contact/contact";
 import './app.less';
+import config from "./config";
 
 
 class App extends React.Component {
@@ -15,9 +16,20 @@ class App extends React.Component {
     }
 
     changeTab = e => {
+
         if (e.key === "resume"){
+            fetch(config.api.resume).then(resp => resp.blob()).then(blob => {
+                let url = window.URL.createObjectURL(blob);
+                let a = document.createElement('a');
+                a.href = url;
+                a.download = "Nimit_Patel_Resume.pdf";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            });
             return;
         }
+
         this.setState({
             tabSelected: e.key
         })
