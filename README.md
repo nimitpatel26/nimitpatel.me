@@ -1,1 +1,2 @@
 # nimitpatel.me
+This repository contains code to my personal website that is written using React and Lambda functions. This website is used to showcase my projects and interests. This application is mostly written in HTML, CSS, and JavaScript. I have used [Ant.design](https://ant.design/) for the UI. It's hosted on Netlify and uses Fauna database to store information.
