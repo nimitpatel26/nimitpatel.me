@@ -17,8 +17,8 @@ class Projects extends React.Component {
 
 
     componentDidMount() {
-        fetch(config.api.projects).then(resp => resp.json()).then(
-            data => {
+        fetch(config.api.projects).then(resp => resp.json()).then(data =>
+            {
                 let tags = new Set();
                 for (let proj of data) {
                     for (let tag of proj.tags) {
@@ -26,6 +26,12 @@ class Projects extends React.Component {
                     }
                     proj.tags.sort();
                 }
+
+                data = data.sort((p1, p2) => {
+                    let d1 = new Date(p1.date);
+                    let d2 = new Date(p2.date);
+                    return d1 < d2;
+                })
 
                 this.setState({
                     projectData: data,
@@ -88,15 +94,15 @@ class Projects extends React.Component {
             let demoLink = null;
 
             if (project.source){
-                gitHubLink = <a href={project.source} target="_blank"><GithubOutlined className="source"/></a>;
+                gitHubLink = <a href={project.source} target="_blank"><GithubOutlined className="linkButton"/></a>;
             }
 
             if (project.live){
-                projectLiveLink = <a href={project.live} target="_blank"><RocketOutlined className="source"/></a>;
+                projectLiveLink = <a href={project.live} target="_blank"><RocketOutlined className="linkButton"/></a>;
             }
 
             if (project.demo){
-                demoLink = <a href={project.demo} target="_blank"><PlayCircleOutlined className="source"/></a>;
+                demoLink = <a href={project.demo} target="_blank"><PlayCircleOutlined className="linkButton"/></a>;
             }
 
             dataToShow.push (
