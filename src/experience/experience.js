@@ -25,11 +25,15 @@ class Experience extends React.Component {
         return this.state.experienceData.map(work => {
 
             let formattedDetails = work.details.map(detail => <li key={detail}>{detail}</li>);
+            // let startDate = new Date(work.from);
+            // let toDate = new Date(work.to);
+            // let startStr = startDate.toLocaleString('default', { month: 'long' }) + ", " + startDate.getFullYear();
+            // let toStr = toDate.toLocaleString('default', { month: 'long' }) + ", " + toDate.getFullYear();
+
 
             return (
-                <Card key={work.title} title={work.title} className="Card">
-                    <p>{work.company}</p>
-                    <p>{work.from}-{work.to}</p>
+                <Card key={work.title} title={work.title + " @ " + work.company} className="Card">
+                    <p>{work.from} to {work.to}</p>
                     <ul>{formattedDetails}</ul>
                 </Card>
             )
