@@ -60,15 +60,16 @@ class App extends React.Component {
             <div className="app">
                 <div className="header">
                     <h1>nimitpatel.me</h1>
-
-                <Menu className="menu" mode="horizontal" selectedKeys={[this.state.tabSelected]} onClick={this.changeTab}>
-                    <Menu.Item key="about">About</Menu.Item>
-                    <Menu.Item key="education">Education</Menu.Item>
-                    <Menu.Item key="projects">Projects</Menu.Item>
-                    <Menu.Item key="experience">Experience</Menu.Item>
-                    <Menu.Item key="resume">Resume</Menu.Item>
-                    <Menu.Item key="contact">Contact</Menu.Item>
-                </Menu>
+                </div>
+                <div className="menu">
+                    <Menu className="menu" mode="horizontal" selectedKeys={[this.state.tabSelected]} onClick={this.changeTab}>
+                        <Menu.Item key="about">About</Menu.Item>
+                        <Menu.Item key="education">Education</Menu.Item>
+                        <Menu.Item key="projects">Projects</Menu.Item>
+                        <Menu.Item key="experience">Experience</Menu.Item>
+                        <Menu.Item key="resume">Resume</Menu.Item>
+                        <Menu.Item key="contact">Contact</Menu.Item>
+                    </Menu>
                 </div>
 
                 <div className="content">

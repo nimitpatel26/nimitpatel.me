@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, Tag} from "antd";
-import {GithubOutlined} from '@ant-design/icons';
+import {GithubOutlined, RocketOutlined, PlayCircleOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.less';
 
 import config from '../config';
@@ -83,11 +83,32 @@ class Projects extends React.Component {
             let formattedDes = project.description.map(des => <li key={des}>{des}</li>);
             let formattedTags = project.tags.map(tag => <Tag key={tag}>{tag}</Tag>);
 
+            let gitHubLink = null;
+            let projectLiveLink = null;
+            let demoLink = null;
+
+            if (project.source){
+                gitHubLink = <a href={project.source} target="_blank"><GithubOutlined className="source"/></a>;
+            }
+
+            if (project.live){
+                projectLiveLink = <a href={project.live} target="_blank"><RocketOutlined className="source"/></a>;
+            }
+
+            if (project.demo){
+                demoLink = <a href={project.demo} target="_blank"><PlayCircleOutlined className="source"/></a>;
+            }
 
             dataToShow.push (
                 <div className="Card" >
                     <Card key={i} title={project.title}
-                          extra={<a href={project.source} target="_blank"><GithubOutlined className="source"/></a>}>
+                          extra={
+                              <div>
+                                  {gitHubLink}
+                                  {projectLiveLink}
+                                  {demoLink}
+                              </div>
+                          }>
                         <ul>{formattedDes}</ul>
 
                         {formattedTags}
