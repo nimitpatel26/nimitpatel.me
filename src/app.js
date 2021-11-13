@@ -17,18 +17,18 @@ class App extends React.Component {
 
     changeTab = e => {
 
-        if (e.key === "resume"){
-            fetch(config.api.resume).then(resp => resp.blob()).then(blob => {
-                let url = window.URL.createObjectURL(blob);
-                let a = document.createElement('a');
-                a.href = url;
-                a.download = "Nimit_Patel_Resume.pdf";
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            });
-            return;
-        }
+        // if (e.key === "resume"){
+        //     fetch(config.api.resume).then(resp => resp.blob()).then(blob => {
+        //         let url = window.URL.createObjectURL(blob);
+        //         let a = document.createElement('a');
+        //         a.href = url;
+        //         a.download = "Nimit_Patel_Resume.pdf";
+        //         document.body.appendChild(a);
+        //         a.click();
+        //         a.remove();
+        //     });
+        //     return;
+        // }
 
         this.setState({
             tabSelected: e.key
@@ -67,7 +67,7 @@ class App extends React.Component {
                         <Menu.Item key="education">Education</Menu.Item>
                         <Menu.Item key="projects">Projects</Menu.Item>
                         <Menu.Item key="experience">Experience</Menu.Item>
-                        <Menu.Item key="resume">Resume</Menu.Item>
+                        {/*<Menu.Item key="resume">Resume</Menu.Item>*/}
                         <Menu.Item key="contact">Contact</Menu.Item>
                     </Menu>
                 </div>
